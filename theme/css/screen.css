@@ -14,10 +14,10 @@ html,body{height:100%;color:#424141;background-color:#f5f5f5}
 #header-wrapper .nav a:hover{text-decoration:line-through}
 #main{width:55%;max-width:960px;margin:0 auto;padding-bottom:6.250em}
 
-/* Add this CSS rule to justify text in paragraphs within the main content */
+/* Add this CSS rule to justify text in paragraphs within the main content 
 #main p {
     text-align: justify !important;
-}
+}*/
 
 #footer-wrapper{position:relative;height:5.000em;margin-top:-5.000em;text-align:center;border-top:1px solid #ccc;text-transform:uppercase;background-color:#f5f5f5;font-family:Arial,Helvetica,FreeSans,"Liberation Sans","Nimbus Sans L",sans-serif}
 #footer-wrapper a{text-decoration:none;color:#707070}
@@ -44,8 +44,9 @@ html,body{height:100%;color:#424141;background-color:#f5f5f5}
 #main h2 a{display:inline-block;text-decoration:none;color:#4b4b4b}
 #main h2 a:visited{color:#4b4b4b}
 #main h2:first-child{margin:1em 0}
-#main p{margin-bottom:1em}
-#main img{display:block;margin:1em auto;padding:.3em;border:1px none;max-width:100%}
+#main p{margin-bottom:1em;text-align: justify;}
+/* #main img{display:block;margin:1em auto;padding:.3em;border:1px none;max-width:100%}*/
+#main img{display:block;margin-left: 0;margin-right: auto;}
 #main a[href$=".png"],#main a[href$=".gif"],#main a[href$=".jpg"],#main a[href$=".jpeg"]{cursor:pointer;cursor:zoom-in;cursor:-moz-zoom-in;cursor:-webkit-zoom-in}
 #main ul{margin:1em 0px}
 #main ol,#main li{margin-left:1em}
@@ -66,7 +67,8 @@ html,body{height:100%;color:#424141;background-color:#f5f5f5}
 #main th,#main td{text-align:left;padding:0.313em 0.625em;border:1px solid #ccc}
 #main dt{color:#444;font-weight:700}
 #main dd{margin-left:1em}
-#main .video{position:relative;padding-bottom:56.25%;height:0;overflow:hidden}
+/* #main .video{position:relative;padding-bottom:56.25%;height:0;overflow:hidden}*/
+#main .video{display: block;margin-left: 0;margin-right: auto;}
 #main .video iframe,#main .video object,#main .video embed{position:absolute;top:0;left:0;width:100%;height:100%;margin-bottom:1em}
 #main code{font-size:1.0rem;display:inline-block;background-color:transparent;color:#657b83}
 #main pre{line-height:1.5;margin-bottom:1em;padding:0.313em;overflow:auto;background-color:#fbfbfb;border:1px solid #c9c9c9}
