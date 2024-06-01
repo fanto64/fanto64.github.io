@@ -80,3 +80,42 @@ footer {
     bottom: 0;
     box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
 }
+
+/* Media query for tablets (768px - 1024px) */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    /* Tablet styles */
+    /* Adjust layout and font sizes for tablets */
+}
+
+/* Media query for mobile devices (up to 767px) */
+@media only screen and (max-width: 767px) {
+    /* Mobile styles */
+    /* Adjust layout and font sizes for mobile devices */
+}
+
+/* This prevents images from overflowing their containers on smaller screens */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Apply hover effect to links */
+a:hover {
+    color: #ff0000; /* Change text color on hover */
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Apply animated transition to button */
+button {
+    background-color: #008cba;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition effect */
+}
+
+/* Change background color on hover */
+button:hover {
+    background-color: #005f70;
+}
