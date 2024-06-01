@@ -19,26 +19,6 @@ html,body{height:100%;color:#424141;background-color:#f5f5f5}
     text-align: justify !important;
 }
 
-/* Left-Justified Images */
-#main img {
-    display: block;
-    margin: 0 auto 1em 0;
-    text-align: left;
-}
-
-/* Article-Justified Text in Lists */
-#main ol, #main ul {
-    text-align: justify;
-    -webkit-text-align-last: center; /* Safari */
-    text-align-last: center;
-    margin-left: 1em;
-}
-
-#main li {
-    margin-bottom: 0.5em;
-}
-
-
 #footer-wrapper{position:relative;height:5.000em;margin-top:-5.000em;text-align:center;border-top:1px solid #ccc;text-transform:uppercase;background-color:#f5f5f5;font-family:Arial,Helvetica,FreeSans,"Liberation Sans","Nimbus Sans L",sans-serif}
 #footer-wrapper a{text-decoration:none;color:#707070}
 #footer-wrapper a:hover{color:#688fad}
