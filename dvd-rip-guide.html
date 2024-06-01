@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>DVD Rip Guide | Das Blog</title>
+  <meta charset="utf-8">
+<meta name="description" content="A guide for ripping a DVD to a computer."><meta name="author" content="Fanto">  <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+  <meta http-equiv="Cache-Control" content="max-age=604800, must-revalidate" />
+  <link href="https://fanto64.github.io/theme/css/screen.css" rel="stylesheet" type="text/css" />
+  <link rel="icon" href="https://fanto64.github.io/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="https://fanto64.github.io/favicon.ico" type="image/x-icon">
+  <link href="https://fanto64.github.io/" type="application/atom+xml" rel="alternate" title="Das Blog ATOM Feed" />
+</head>
+<body>
+<div id="outer-wrapper">
+<div id="header-wrapper">
+  <div class="logo"><a href="https://fanto64.github.io">Das Blog</a></div>
+  <div class="small"></div>
+    <div class="nav">
+  <li><a href="https://fanto64.github.io/">Home</a></li>
+  <li><a href="https://fanto64.github.io/pages/about.html">About</a></li>
+    </div>
+</div>    <div id="main">
+<h2><a href="https://fanto64.github.io/dvd-rip-guide.html">DVD Rip Guide</a></h2>
+<h5><i class="icon-feather"></i> Sat 01 June 2024
+<i class="icon-bookmarks"></i>
+<span><a href="https://fanto64.github.io/tag/guide.html">guide</a> / </span>
+<span><a href="https://fanto64.github.io/tag/ripping.html">ripping</a> / </span>
+<span><a href="https://fanto64.github.io/tag/dvd.html">dvd</a> / </span>
+</h5>
+
+<h1>DVD Rip Guide</h1>
+<p><strong>Software Requirements</strong>: MakeMKV, Handbrake</p>
+<ol>
+<li>Insert your DVD into your disc drive.</li>
+<li>Open MakeMKV.</li>
+<li>Click on the large disc drive icon.</li>
+<li>On the left hand side, select the title with the largest file size, as this is typically the movie file.</li>
+<li>Select the output folder where you want to save the movie file.</li>
+<li>Click the Make MKV button to the right of the output folder.</li>
+<li>Close MakeMKV.</li>
+<li>Open Handbrake</li>
+<li>Select "File" and then navigate to the movie file you just saved.</li>
+<li>Now, in each of the tabs here in Handbrake, we're going to change some settings.</li>
+<li>In the <strong>Summary</strong> tab, change "Format" to MKV, and make sure the "Passthru Common Metadata" box is checked.</li>
+<li>In the <strong>Dimensions</strong> tab, make sure the "Resolution Limit" is set to "480p NTSC SD".</li>
+<li>In the <strong>Filters</strong> tab, you can turn everything off.<ul>
+<li>However, if your DVD has interlaced video (horizontal lines on movement), you'll want to set the "Deinterlace" setting to "Decomb". You can check for interlaced video by using the "Preview" option in Handbrake.</li>
+</ul>
+</li>
+<li>In the <strong>Video</strong> tab, set "Video Encoder" to "H.265 (x265)", set "Framerate" to "Same as source", select "Avg Bitrate" and set it to "1500", turn off "Multi-Pass Encoding", set the "Encoder Preset" to "Veryfast", Encoder Tune to "None", Encoder Profile to "Main", and Encoder Level to "Auto".</li>
+<li>In the <strong>Audio</strong> tab, set "Codec" to AAC, Quality to "Bitrate" and "192", and "Mixdown" to "Stereo".<ul>
+<li>If you know there are other audio tracks you want to include, like a commentary track, you can select the "Tracks" dropdown menu, choose "Add new track" and then change it to the appropriate "Source", following the same settings for the last track otherwise.</li>
+</ul>
+</li>
+<li>In the <strong>Subtitles</strong> tab, under the "Tracks" dropdown menu, you can add a new track, just make sure it's set to English, or whatever language(s) you want.</li>
+<li>In the <strong>Chapters</strong> tab, it should automatically have any chapters listed, just make sure the "Create chapter markers" box is checked.</li>
+<li>Now, in the bottom right, select "Browse" to choose our save destination, as well as the name of the file, which should then fill in next to the "Save As:" field.\</li>
+<li>Everything should be ready now, so hit the big green "Start Encode" button at the top.</li>
+<li>Once it's finished, congratulations, you just ripped your DVD! The file should be where we told it to save.</li>
+</ol>
+
+<p align="center"><a href="#">on the top</a></p>
+    </div>
+</div>
+<div id="footer-wrapper">
+<ul class="footer">
+     <li class="footer"><a href="https://fanto64.github.io/tag/blog.html">blog&nbsp;&bull;&nbsp;</a></li>
+     <li class="footer"><a href="https://fanto64.github.io/tag/challenge.html">challenge&nbsp;&bull;&nbsp;</a></li>
+     <li class="footer"><a href="https://fanto64.github.io/tag/dvd.html">dvd&nbsp;&bull;&nbsp;</a></li>
+     <li class="footer"><a href="https://fanto64.github.io/tag/guide.html">guide&nbsp;&bull;&nbsp;</a></li>
+     <li class="footer"><a href="https://fanto64.github.io/tag/pelican.html">pelican&nbsp;&bull;&nbsp;</a></li>
+     <li class="footer"><a href="https://fanto64.github.io/tag/ps2.html">ps2&nbsp;&bull;&nbsp;</a></li>
+     <li class="footer"><a href="https://fanto64.github.io/tag/ripping.html">ripping&nbsp;&bull;&nbsp;</a></li>
+     <li class="footer"><a href="https://fanto64.github.io/tag/vinyl.html">vinyl</a></li>
+</ul><ul class="footer">
+    <li class="footer">&copy;&nbsp;2014&nbsp;::</li>
+    <li class="footer"><a href="https://fanto64.github.io">Das Blog </a>&nbsp;::</li>
+    <li class="footer">powered by <a href="https://github.com/getpelican">pelican</a>&nbsp;::</li>
+    <li class="footer"><a href="http://creativecommons.org/licenses/by-nc/3.0/deed.ru">CC BY-NC</a></li>
+</ul>
+</div></body>
+</html>
