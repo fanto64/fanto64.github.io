@@ -81,7 +81,7 @@ footer {
     bottom: 0;
     box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Center the footer content horizontally */
     align-items: center;
 }
 
@@ -92,10 +92,12 @@ footer .footer-content {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    width: 100%; /* Ensure the footer content takes up the full width */
 }
 
 footer nav {
-    margin-left: 20px;
+    /* Remove margin-left and set margin to auto to center the navigation */
+    margin: 0 auto;
 }
 
 footer nav a {
