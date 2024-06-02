@@ -215,7 +215,7 @@ button:hover {
     border-radius: 3px;
     background-color: #f0f0f0;
     color: #333;
-    font-size: 10px; /* Adjust font size as needed */
+    font-size: 10px; /* Adjust font size*/
     text-decoration: none;
     cursor: pointer;
 }
