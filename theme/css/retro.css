@@ -37,7 +37,7 @@ nav {
 }
 
 nav a.header-button {
-    background-color: #1e90ff; /* Button background color */
+    background-color: #00bfff; /* Button background color */
     color: #fff; /* Button text color */
     text-decoration: none; /* Remove underline */
     padding: 10px 20px; /* Button padding */
@@ -47,7 +47,7 @@ nav a.header-button {
 }
 
 nav a.header-button:hover {
-    background-color: #00bfff; /* Button hover background color */
+    background-color: #1e90ff; /* Button hover background color */
 }
 
 /* Content styles */
