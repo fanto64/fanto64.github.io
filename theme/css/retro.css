@@ -91,11 +91,20 @@ article p {
     margin-right: 10px;
 }
 
+.meta-info {
+    display: flex;
+    align-items: center;
+}
+
+.meta-info small {
+    margin-right: 10px;
+}
+
 .tags {
     display: flex;
     flex-wrap: wrap;
     align-items: center; /* Align tags vertically */
-    margin-top: 10px; /* Add margin to separate tags from the content */
+    margin-top: 2px; /* Add margin to separate tags from the content */
 }
 
 .tag {
