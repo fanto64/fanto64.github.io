@@ -86,11 +86,17 @@ article p {
     align-items: center;
 }
 
-.published-date,
-.updated-date,
+.published-date {
+    margin-right: 10px; /* Adjust spacing between published date and other meta information */
+}
+
+.meta-info {
+    display: flex;
+    align-items: center; /* Align items vertically */
+}
+
 .tags {
-    vertical-align: middle; /* Align items vertically */
-    margin-right: 4px; /* Adjust spacing between elements */
+    margin-left: 10px; /* Adjust spacing between updated date/tags and other meta information */
 }
 
 .tags button {
