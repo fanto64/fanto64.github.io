@@ -16,7 +16,7 @@ body {
 
 /* Header styles */
 header {
-    background: linear-gradient(90deg, #1e90ff, #00bfff);
+    background: linear-gradient(90deg, #1e90ff, #00bfff); /* Header gradient (90deg, #1e90ff, #00bfff) */
     color: #fff;
     padding: 1em 0;
     text-align: center;
@@ -31,22 +31,23 @@ header h1 {
 
 /* Navigation styles */
 nav {
-    background: #00bfff;
-    color: #fff;
     padding: 0.5em;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-nav a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 1em;
-    font-weight: bold;
+nav a.header-button {
+    background-color: #1e90ff; /* Button background color */
+    color: #fff; /* Button text color */
+    text-decoration: none; /* Remove underline */
+    padding: 10px 20px; /* Button padding */
+    margin: 0 10px; /* Button margin */
+    border-radius: 5px; /* Button border radius */
+    transition: background-color 0.3s; /* Button hover effect transition */
 }
 
-nav a:hover {
-    text-decoration: underline;
+nav a.header-button:hover {
+    background-color: #00bfff; /* Button hover background color */
 }
 
 /* Content styles */
