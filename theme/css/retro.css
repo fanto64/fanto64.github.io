@@ -56,6 +56,7 @@ nav a.header-button:hover {
 .content {
     max-width: 800px;
     margin: 2em auto;
+    margin-bottom: 100px;
     padding: 1em;
     background: #fff;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -84,7 +85,7 @@ footer {
     background: linear-gradient(90deg, #00bfff, #1e90ff); /* Footer gradient (90deg, #00bfff, #1e90ff) */
     color: #fff;
     padding: 1em 0;
-    position: relative;
+    position: fixed;
     z-index: 1;
     width: 100%;
     bottom: 0;
