@@ -103,6 +103,7 @@ footer nav a {
 
 footer p {
     margin: 0; /* Remove default margin */
+    text-align: right;
 }
 
 /* Media query for tablets (768px - 1024px) */
