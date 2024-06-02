@@ -72,6 +72,11 @@ article h2 {
     color: #1e90ff;
 }
 
+/* Justify text in article paragraphs */
+article p {
+    text-align: justify;
+}
+
 /* Footer styles */
 footer {
     background: linear-gradient(90deg, #00bfff, #1e90ff); /* Footer gradient (90deg, #00bfff, #1e90ff) */
