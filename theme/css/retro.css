@@ -80,9 +80,15 @@ footer {
     width: 100%;
     bottom: 0;
     box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+}
+
+footer .footer-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
 footer nav {
@@ -96,7 +102,7 @@ footer nav a {
 }
 
 footer p {
-    margin-right: 20px;
+    margin: 0; /* Remove default margin */
 }
 
 /* Media query for tablets (768px - 1024px) */
