@@ -58,3 +58,18 @@
     </footer>     
 </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tags = document.querySelectorAll('.tag');
+        const colors = [
+            '#1e90ff', '#32cd32', '#ff6347', '#ff69b4', '#8a2be2', '#ffa500', 
+            '#40e0d0', '#ff4500', '#7fff00', '#da70d6', '#00bfff', '#ffd700', 
+            '#cd5c5c', '#87cefa', '#6495ed'
+        ];
+        
+        tags.forEach(tag => {
+            const colorIndex = tag.innerText.length % colors.length;
+            tag.style.backgroundColor = colors[colorIndex];
+        });
+    });
+</script>

@@ -24,10 +24,10 @@
                 <small>Published on: June 01, 2024</small>
             </p>
             <div class="tags">
-                    <button class="tag">guide</button>
-                    <button class="tag">cd</button>
-                    <button class="tag">eac</button>
-                    <button class="tag">rip</button>
+                    <button class="tag" data-tag="guide">guide</button>
+                    <button class="tag" data-tag="cd">cd</button>
+                    <button class="tag" data-tag="eac">eac</button>
+                    <button class="tag" data-tag="rip">rip</button>
             </div>
         </article>
         <article>
@@ -37,9 +37,9 @@
                 <small>Published on: June 01, 2024</small>
             </p>
             <div class="tags">
-                    <button class="tag">guide</button>
-                    <button class="tag">ripping</button>
-                    <button class="tag">dvd</button>
+                    <button class="tag" data-tag="guide">guide</button>
+                    <button class="tag" data-tag="ripping">ripping</button>
+                    <button class="tag" data-tag="dvd">dvd</button>
             </div>
         </article>
         <article>
@@ -49,11 +49,11 @@
                 <small>Published on: June 01, 2024</small>
             </p>
             <div class="tags">
-                    <button class="tag">guide</button>
-                    <button class="tag">cd</button>
-                    <button class="tag">eac</button>
-                    <button class="tag">setup</button>
-                    <button class="tag">install</button>
+                    <button class="tag" data-tag="guide">guide</button>
+                    <button class="tag" data-tag="cd">cd</button>
+                    <button class="tag" data-tag="eac">eac</button>
+                    <button class="tag" data-tag="setup">setup</button>
+                    <button class="tag" data-tag="install">install</button>
             </div>
         </article>
         <article>
@@ -63,9 +63,9 @@
                 <small>Published on: June 01, 2024</small>
             </p>
             <div class="tags">
-                    <button class="tag">guide</button>
-                    <button class="tag">ripping</button>
-                    <button class="tag">vinyl</button>
+                    <button class="tag" data-tag="guide">guide</button>
+                    <button class="tag" data-tag="ripping">ripping</button>
+                    <button class="tag" data-tag="vinyl">vinyl</button>
             </div>
         </article>
         <article>
@@ -76,8 +76,8 @@
                         <small>(Updated on: May 30, 2024)</small>
             </p>
             <div class="tags">
-                    <button class="tag">ps2</button>
-                    <button class="tag">challenge</button>
+                    <button class="tag" data-tag="ps2">ps2</button>
+                    <button class="tag" data-tag="challenge">challenge</button>
             </div>
         </article>
         <article>
@@ -87,8 +87,8 @@
                 <small>Published on: May 26, 2024</small>
             </p>
             <div class="tags">
-                    <button class="tag">pelican</button>
-                    <button class="tag">blog</button>
+                    <button class="tag" data-tag="pelican">pelican</button>
+                    <button class="tag" data-tag="blog">blog</button>
             </div>
         </article>
 
@@ -107,3 +107,18 @@
     </footer>     
 </body>
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tags = document.querySelectorAll('.tag');
+        const colors = [
+            '#1e90ff', '#32cd32', '#ff6347', '#ff69b4', '#8a2be2', '#ffa500', 
+            '#40e0d0', '#ff4500', '#7fff00', '#da70d6', '#00bfff', '#ffd700', 
+            '#cd5c5c', '#87cefa', '#6495ed'
+        ];
+        
+        tags.forEach(tag => {
+            const colorIndex = tag.innerText.length % colors.length;
+            tag.style.backgroundColor = colors[colorIndex];
+        });
+    });
+</script>
