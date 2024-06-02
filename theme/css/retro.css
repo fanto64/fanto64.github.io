@@ -73,13 +73,16 @@ article h2 {
 
 /* Footer styles */
 footer {
-    background: #1e90ff;
+    background: linear-gradient(90deg, #00bfff, #1e90ff); /* Footer gradient (90deg, #00bfff, #1e90ff) */
     color: #fff;
     padding: 1em 0;
     position: fixed;
     width: 100%;
     bottom: 0;
     box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 footer .footer-content {
@@ -103,6 +106,7 @@ footer nav a {
 
 footer p {
     margin: 0; /* Remove default margin */
+    text-align: center;
 }
 
 /* Media query for tablets (768px - 1024px) */
