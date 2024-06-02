@@ -87,6 +87,7 @@ footer {
 
 footer .footer-content {
     display: flex;
+    flex-direction: column; /* Display navigation links and copyright text in a column */
     justify-content: space-between;
     align-items: center;
     max-width: 1200px;
@@ -96,8 +97,7 @@ footer .footer-content {
 }
 
 footer nav {
-    /* Remove margin-left and set margin to auto to center the navigation */
-    margin: 0 auto;
+    margin: 0 auto; /* Center the navigation links horizontally */
 }
 
 footer nav a {
