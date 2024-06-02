@@ -164,3 +164,17 @@ button {
 button:hover {
     background-color: #005f70;
 }
+
+/* CSS for tag buttons */
+.tag {
+    display: inline-block;
+    padding: 5px 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
