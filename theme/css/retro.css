@@ -217,7 +217,7 @@ button:hover {
     color: #fff;
     font-size: 10px; /* Adjust font size */
     text-decoration: none;
-    cursor: pointer;
+    cursor: default;
 }
 
 /* Example tag colors - different shades of blue */
