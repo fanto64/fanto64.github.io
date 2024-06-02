@@ -81,31 +81,27 @@ article p {
     text-align: justify;
 }
 
+/* CSS */
 .article-meta {
     display: flex;
     align-items: center;
 }
 
 .published-date {
-    margin-right: 10px; /* Adjust spacing between published date and other meta information */
-}
-
-.meta-info {
-    display: flex;
-    align-items: center; /* Align items vertically */
+    margin-right: 10px;
 }
 
 .tags {
-    display: flex; /* Use Flexbox for tag buttons */
-    flex-wrap: wrap; /* Allow tags to wrap to the next line if needed */
-    margin-left: 10px; /* Adjust spacing between updated date/tags and other meta information */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center; /* Align tags vertically */
+    margin-top: 10px; /* Add margin to separate tags from the content */
 }
 
 .tag {
-    margin-right: 5px; /* Adjust spacing between tags */
+    margin-right: 5px;
     /* Your tag button styles */
 }
-
 
 .tags button {
     margin-right: 2px; /* Adjust spacing between tags */
