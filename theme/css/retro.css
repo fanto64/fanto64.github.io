@@ -220,22 +220,22 @@ button:hover {
     cursor: pointer;
 }
 
-/* Example tag colors */
-[data-tag="tag1"] { background-color: #4a90e2; }  /* Nice blue */
-[data-tag="tag2"] { background-color: #50e3c2; }  /* Teal */
-[data-tag="tag3"] { background-color: #7b8d8e; }  /* Bluish-gray */
-[data-tag="tag4"] { background-color: #9013fe; }  /* Purplish-blue */
-[data-tag="tag5"] { background-color: #1c8adb; }  /* Another shade of blue */
-[data-tag="tag6"] { background-color: #6fc1a5; }  /* Another shade of teal */
-[data-tag="tag7"] { background-color: #5f7b7d; }  /* Another bluish-gray */
-[data-tag="tag8"] { background-color: #6e63dc; }  /* Another purplish-blue */
-[data-tag="tag9"] { background-color: #357abf; }  /* Blue */
-[data-tag="tag10"] { background-color: #4bb5ab; }  /* Teal */
-[data-tag="tag11"] { background-color: #738e92; }  /* Bluish-gray */
-[data-tag="tag12"] { background-color: #715aff; }  /* Purplish-blue */
-[data-tag="tag13"] { background-color: #26619c; }  /* Blue */
-[data-tag="tag14"] { background-color: #43a99e; }  /* Teal */
-[data-tag="tag15"] { background-color: #5c768d; }  /* Bluish-gray */
+/* Example tag colors - different shades of blue */
+[data-tag="tag1"] { background-color: #1c7ed6; }
+[data-tag="tag2"] { background-color: #1864ab; }
+[data-tag="tag3"] { background-color: #0b5394; }
+[data-tag="tag4"] { background-color: #083d77; }
+[data-tag="tag5"] { background-color: #034078; }
+[data-tag="tag6"] { background-color: #00509d; }
+[data-tag="tag7"] { background-color: #2c7da0; }
+[data-tag="tag8"] { background-color: #144a74; }
+[data-tag="tag9"] { background-color: #1e3d59; }
+[data-tag="tag10"] { background-color: #1d2d50; }
+[data-tag="tag11"] { background-color: #003f88; }
+[data-tag="tag12"] { background-color: #2a6f97; }
+[data-tag="tag13"] { background-color: #0e4d92; }
+[data-tag="tag14"] { background-color: #2c3e50; }
+[data-tag="tag15"] { background-color: #1f4e79; }
 
 
 /* Remove hover effect */
