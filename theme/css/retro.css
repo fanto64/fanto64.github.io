@@ -89,10 +89,15 @@ footer nav {
     margin-left: 20px;
 }
 
+footer nav a {
+    color: #fff; /* Match the color of header links */
+    text-decoration: none; /* Remove underline */
+    margin-right: 20px; /* Add spacing between links */
+}
+
 footer p {
     margin-right: 20px;
 }
-
 
 /* Media query for tablets (768px - 1024px) */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
