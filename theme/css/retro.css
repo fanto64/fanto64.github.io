@@ -75,13 +75,24 @@ article h2 {
 footer {
     background: #1e90ff;
     color: #fff;
-    text-align: center;
     padding: 1em 0;
     position: fixed;
     width: 100%;
     bottom: 0;
     box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
+
+footer nav {
+    margin-left: 20px;
+}
+
+footer p {
+    margin-right: 20px;
+}
+
 
 /* Media query for tablets (768px - 1024px) */
 @media only screen and (min-width: 768px) and (max-width: 1024px) {
