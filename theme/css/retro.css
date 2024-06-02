@@ -89,6 +89,7 @@ article p {
 .published-date,
 .updated-date,
 .tags {
+    vertical-align: middle; /* Align items vertically */
     margin-right: 4px; /* Adjust spacing between elements */
 }
 
