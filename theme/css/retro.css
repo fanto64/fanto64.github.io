@@ -100,10 +100,18 @@ footer nav {
     margin: 0 auto; /* Center the navigation links horizontally */
 }
 
-footer nav a {
-    color: #fff; /* Match the color of header links */
+footer nav a.footer-button {
+    background-color: #00bfff; /* Button background color */
+    color: #fff; /* Button text color */
     text-decoration: none; /* Remove underline */
-    margin-right: 20px; /* Add spacing between links */
+    padding: 10px 20px; /* Button padding */
+    margin: 10px; /* Button margin */
+    border-radius: 5px; /* Button border radius */
+    transition: background-color 0.3s; /* Button hover effect transition */
+}
+
+footer nav a.footer-button:hover {
+    background-color: #1e90ff; /* Button hover background color */
 }
 
 footer p {
