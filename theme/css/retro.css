@@ -82,7 +82,7 @@ article p {
 }
 
 .article-meta {
-    /*display: flex; */
+    display: flex;
     align-items: center;
 }
 
