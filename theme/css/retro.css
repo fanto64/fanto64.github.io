@@ -165,6 +165,11 @@ button:hover {
     background-color: #005f70;
 }
 
+/* CSS for tags */
+.tags {
+    margin-top: 5px; /* Adjust margin as needed */
+}
+
 /* CSS for tag buttons */
 .tag {
     display: inline-block;
