@@ -102,7 +102,7 @@ footer nav a {
 }
 
 footer p {
-    margin: 0; /* Remove default margin */
+    margin-right: 10; /* Remove default margin */
     text-align: right;
 }
 
