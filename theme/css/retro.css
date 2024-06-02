@@ -95,7 +95,7 @@ footer {
     /* Adjust layout and font sizes for mobile devices */
 }
 
-/* This prevents images from overflowing their containers on smaller screens */
+/* This prevents images from overflowing their containers on smaller screens, keeps it inbounds ya know */
 img {
     max-width: 100%;
     height: auto;
