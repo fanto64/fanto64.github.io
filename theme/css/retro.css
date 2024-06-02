@@ -96,8 +96,16 @@ article p {
 }
 
 .tags {
+    display: flex; /* Use Flexbox for tag buttons */
+    flex-wrap: wrap; /* Allow tags to wrap to the next line if needed */
     margin-left: 10px; /* Adjust spacing between updated date/tags and other meta information */
 }
+
+.tag {
+    margin-right: 5px; /* Adjust spacing between tags */
+    /* Your tag button styles */
+}
+
 
 .tags button {
     margin-right: 2px; /* Adjust spacing between tags */
