@@ -1,0 +1,242 @@
+<!-- article.html -->
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Blog</title>
+    <link rel="stylesheet" href="https://fanto64.github.io/theme/css/retro.css">
+</head>
+<body>
+    <header>
+        <h1>Das Blog</h1>
+        <nav>
+            <a href="https://fanto64.github.io/" class="header-button">Home</a>
+            <a href="https://fanto64.github.io/categories.html" class="header-button">Categories</a>
+            <a href="https://fanto64.github.io/pages/about.html" class="header-button">About</a>
+        </nav>
+    </header>    
+    <div class="content">
+    <article>
+        <h2>Plex Music Database Exploration</h2>
+        <div class="article-meta">
+            <span class="published-date">
+                <small>Published on: June 03, 2024</small>
+            </span>
+            <span class="meta-info">
+            </span>
+        </div>
+        <div class="tags">
+                <button class="tag">plex</button>
+                <button class="tag">music</button>
+                <button class="tag">blog</button>
+        </div>
+        <p><hr>
+<h3>Part 1: The Graph</h3>
+<hr>
+<p>So, messing around with ChatGPT and using Python, I was able to start messing around with my Plex database and poking around inside of it.</p>
+<p>There's so much data in there, and I'm not used to SQL queries, that shit is rough, but luckily ChatGPT was able to guide my ass through it all. Now, of course, I do have a Bachelor's degree in programming, so I know what I want to do and how to lay out the path to get there, just not exactly how to go about doing it, and that's where the AI comes in.</p>
+<p>One of the first data visualizations that I wanted was to chart how many albums I have in each particular year, so I could identify gaps in my library, and know where to focus new music collection efforts.</p>
+<p>So, let's take a look at that, shall we?</p>
+<p><img alt="Albums over Year Chart" src="images/album_releases_over_time.png"></p>
+<p>Now <em>this</em> is what I'm talking about lol, look at all that beautiful data.</p>
+<p>Each point on the graph represents a specific year, as we can see on the X portion of the graph at the bottom. The number next to the point represents how many albums in my collection were released in that year, as we can see on the Y portion of the graph to the left.</p>
+<p>So, as we can see, my collection skews heavily towards music produced in 1995 or later. This makes sense for a couple reasons. For one, that represents the portion of time where I've been alive and over the age of 5, but it also represents the era where CD re-releases, best of compilations, etc. started to come out in droves for older material.</p>
+<p>However, even taking those things into account, we can see there is definitely a discrepancy for pre 90s music.</p>
+<p>Looking closer at the data before the 90s, we can identify a lot of room for improvement in a couple key decades.</p>
+<p>The 50s were obviously a key early era for music, however as we'll see later in the blog, it wasn't as easy to get info on this decade.</p>
+<p>Moving to the 60s though, we can see I am severely lacking until the last couple years, so searching for more early-mid 60s music is a top priority.</p>
+<p>In the 70s and 80s, things bounce around a lot depending on the year, and ultimately trend downwards through to the end of the 80s. I would personally like to see those numbers brought up way higher, closer to the mid-late 90s trend line.</p>
+<p>Then of course, moving past the 90s, we see the 2000s, which is also a huge decade. Again, I think it's mostly inflated due to re-releases, but it's hard to tell because I also do have a ton of albums from that era.</p>
+<p>Then in the 2010s we see the upward trajectory just continue and continue. My theory here is that this is when I was doing the most music collecting, with the peak being in 2017, where I definitely remember getting a lot of like "best album of the year" lists and just grabbing all of them.</p>
+<p>Then we see things rapidly, and I do mean <em>rapidly</em>, decline. Once we get to 2019, that's when things pretty much came to a halt on new music collecting. So there's a lot of room for improvement to grab the last 5 years or so worth of things I've missed.</p>
+<hr>
+<h3>Part 2: The Search for More Music</h3>
+<hr>
+<p>I had now identified where I wanted to improve things, but how do I go about finding things to get? What am I just gunna sit there and spend days upon days endlessly searching for stuff from those decades? Without even a hint of where to start?</p>
+<p>So, I started trying to think, what could I do here... What if I had like, some sort of big dataset of artists and albums to cross reference with my Plex database? Maybe like the Billboard charts? Things I don't have could be sorted out and added to a list. I could even set it then further sort it out and only include things that reached a certain height on the chart.</p>
+<p>But how the hell am I going to go about doing that?</p>
+<p>Oh wait, that's right. I've got ChatGPT on my side, remember?</p>
+<p>So I ask Mr. GPT, can you find me a link to like, a big dataset of Billboard lists from throughout the years, showing the album charts and stuff? And it was like, well yeah.</p>
+<p>So long story short, I now had access to a CSV file that contained all the Billboard 200 data since it's inception in the 60s. Remember how I said earlier that stuff from the 50s was harder to find info on? Yep, that's why.</p>
+<p>Ok, now it was time to get to work here. Hey ChatGPT, go ahead and help me put together some Python scripts to do everything I want to do.</p>
+<p>Long story short yet again, it worked.</p>
+<p>Let's take a look at a sample from the final result:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: center;">
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Decade</th>
+    </tr>
+  </thead>
+      <td>Jose Feliciano</td>
+      <td>Feliciano/10 To 23</td>
+      <td>1960s</td>
+    </tr>
+    <tr>
+      <td>Jose Feliciano</td>
+      <td>Souled</td>
+      <td>1960s</td>
+    </tr>
+    <tr>
+      <td>Judy Collins</td>
+      <td>Wildflowers</td>
+      <td>1960s</td>
+    </tr>
+    <tr>
+      <td>Lou Rawls</td>
+      <td>Too Much!</td>
+      <td>1960s</td>
+    </tr>
+    <tr>
+      <td>Lulu</td>
+      <td>To Sir With Love</td>
+      <td>1960s</td>
+    </tr>
+    <tr>
+      <td>Mason Williams</td>
+      <td>The Mason Williams Phonograph Record</td>
+      <td>1960s</td>
+    </tr>
+    <tr>
+      <td>Nancy Sinatra</td>
+      <td>Nancy &amp; Lee</td>
+      <td>1960s</td>
+    </tr>
+    <tr>
+      <td>Nancy Sinatra</td>
+      <td>Sugar</td>
+      <td>1960s</td>
+    </tr>
+    <tr>
+      <td>O.C. Smith</td>
+      <td>Hickory Holler Revisited</td>
+      <td>1960s</td>
+    </tr>
+</table>
+
+<p>As we can see, I now have a nicely organized CSV file that shows me albums I do not have in my Plex folder, as well as their artist, and which decade they came from. These albums have to have gotten to at least #25 on the Billboard 200 chart to have made it into the final list, though I do have other lists for the entire chart too.</p>
+<p>However I was not done yet!</p>
+<p>There is another way to go about this too, which is to instead consider the artists that I do not have many albums from, less than 3 in this case, since that accounts for artists where maybe I have a greatest hits and one other album, or a double disc greatest hits, and that's it.</p>
+<p>So, I had another question for ChatGPT. Was it possible to create modified versions of these same scripts that would instead check for artists that <em>were</em> in my Plex database, and then do another check to make sure I only had 1 or 2 albums from them, and then do all this stuff to those instead?</p>
+<p>We already know what ChatGPT said. Of course we can do that!</p>
+<p>Let's take a look at that sample now:</p>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: center;">
+      <th>Artist</th>
+      <th>Album</th>
+      <th>Decade</th>
+    </tr>
+  </thead>
+      <td>Jackson Browne</td>
+      <td>Hold Out</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>Jackson Browne</td>
+      <td>Lawyers In Love</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>Jackson Browne</td>
+      <td>Lives In The Balance</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>John Mellencamp</td>
+      <td>Big Daddy</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>John Mellencamp</td>
+      <td>Scarecrow</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>John Mellencamp</td>
+      <td>The Lonesome Jubilee</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>John Mellencamp</td>
+      <td>Uh Huh</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>LL Cool J</td>
+      <td>Bigger And Deffer</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>LL Cool J</td>
+      <td>Walking With A Panther</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>Lionel Richie</td>
+      <td>Can't Slow Down</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>Lionel Richie</td>
+      <td>Dancing On The Ceiling</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>Loverboy</td>
+      <td>Keep It Up</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>Loverboy</td>
+      <td>Lovin' Every Minute Of It</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+      <td>Night Ranger</td>
+      <td>7 Wishes</td>
+      <td>1980s</td>
+    </tr>
+    <tr>
+</table>
+
+<p>Same logic being used to get these, but this time it's artists I already have whose discographies I can fill out with their most popular albums that I'm missing.</p>
+<hr>
+<h3>Part 3: The Next Steps</h3>
+<hr>
+<p>Now is when it's time to start hacking away. From my calculations, getting everything on the list into my collection in FLAC would take probably around 1TB of data, but I've got the space, I just need to take the time.</p>
+<p>I'll be writing more blogs on my adventures poking around in my Plex database and seeing what kind of data and projects I can come up with around those. I'm hoping to dedicate one soon to more graph visualizations like the chart I had here.</p>
+<p>For now, I'll leave you with this goofball-ass word cloud of all my album titles. Thanks for reading, see ya next time.</p>
+<p><img alt="Word Cloud of Album Titles" src="images/album_titles_wordcloud.png"></p></p>
+    </article>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <nav>
+                <a href="https://fanto64.github.io/" class="footer-button">Home</a>
+                <a href="https://fanto64.github.io/categories.html" class="footer-button">Categories</a>
+                <a href="https://fanto64.github.io/pages/about.html" class="footer-button">About</a>
+            </nav>
+            <p>&copy;  Das Blog</p>
+        </div>
+    </footer>     
+</body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tags = document.querySelectorAll('.tag');
+        const colors = [
+            '#1c7ed6', '#1864ab', '#0b5394', '#083d77', '#034078',
+            '#00509d', '#2c7da0', '#144a74', '#1e3d59', '#1d2d50',
+            '#003f88', '#2a6f97', '#0e4d92', '#2c3e50', '#1f4e79'
+        ];
+        
+        tags.forEach(tag => {
+            const colorIndex = tag.innerText.length % colors.length;
+            tag.style.backgroundColor = colors[colorIndex];
+        });
+    });
+</script>
