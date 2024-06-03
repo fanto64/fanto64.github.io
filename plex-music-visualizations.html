@@ -1,0 +1,103 @@
+<!-- article.html -->
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Blog</title>
+    <link rel="stylesheet" href="https://fanto64.github.io/theme/css/retro.css">
+    <link rel="icon" type="image/x-icon" href="{static}/favicon.ico">
+</head>
+<body>
+    <header>
+        <h1>Das Blog</h1>
+        <nav>
+            <a href="https://fanto64.github.io/" class="header-button">Home</a>
+            <a href="https://fanto64.github.io/categories.html" class="header-button">Categories</a>
+            <a href="https://fanto64.github.io/pages/about.html" class="header-button">About</a>
+        </nav>
+    </header>    
+    <div class="content">
+    <article>
+        <h2>Plex Music Visualizations</h2>
+        <div class="article-meta">
+            <span class="published-date">
+                <small>Published on: June 03, 2024</small>
+            </span>
+            <span class="meta-info">
+            </span>
+        </div>
+        <div class="tags">
+                <button class="tag">plex</button>
+                <button class="tag">music</button>
+                <button class="tag">blog</button>
+                <button class="tag">data</button>
+                <button class="tag">visualizations</button>
+        </div>
+        <p><hr>
+<h3>Part 1: Artists With Most Albums</h3>
+<hr>
+<p>I'm back, and I've dived some more into my Plex music database. This time, I wanted to try creating some simple, but informative data visualizations.</p>
+<p>The first one I wanted to make would show the artists with the most albums, and another showing the artists with the most songs.</p>
+<p>I decided to narrow it down to show just the artists with at least 10 albums, and the ones with at least 100 songs.</p>
+<p>So, let's take a look at some of the data!</p>
+<p><img alt="Artists with most Albums" src="images/albums_per_artist.png"></p>
+<p>So as we can see, I have only 62 artists with 10 or more albums. For perspective, there are over 1500 artists in my library.</p>
+<p>It's no surprise to see Pink Floyd topping the chart with a whopping 70 albums, as my Floyd collection consists of not only multiple copies of a lot of their studio albums, but also rareties, bootlegs, multi-disc compilation box sets, and so on.</p>
+<p>Johnny Cash at #2 makes sense as well, because I got an enormous box set back in the day of his albums, I think it was the ones from the Columbia label.</p>
+<p>Things then start to cool off as we drop dramatically down to 37 total for both John Coltrane and the Grateful Dead, with Buckethead trailed right behind at 36 total to round out the top 5 list.</p>
+<p>For Coltrane and Buckethead, those are mostly all studio albums I believe, but with the Dead it's due to a plethora of the Dick's Pick's live albums, as well as other Live bootlegs.</p>
+<p>At #6 an #7 we have Kris Kristofferson and David Allan Coe respectively tied at 30 albums a piece. That should encompass their total studio releases as well as some lives and compilations as well.</p>
+<p>I was kind of surprised to see Alice Cooper make the top 10 at #8 with 27 albums because I did not realize I had that much Alice Cooper lol. Looking into it though, yeah I appear to have all of his studio albums.</p>
+<p>Rounding out the top 10, we've got Hank Williams and Duke Ellington with 26 and 25 albums respectively. These were both big box sets that I downloaded of their entire collections.</p>
+<p>Looking through the others on the list, everything seems about correct to me. Willie Nelson is lagging a bit behind his peers and did not make the top 10. Lots of BTBAM and ISIS. Prince and Dylan representing the home state of Minnesota. We can see the various Slaughterhouse members on the list, Crooked almost cracking the top 10. And it's nice to see Mr. Eaglesmith show up towards the end with 11 total albums.</p>
+<hr>
+<h3>Part 2: Artists With Most Songs</h3>
+<hr>
+<p>Now, I wanted to get a look at the artists with the most songs as well, since having the most unique albums doesn't necessarily equate to having the most songs.</p>
+<p>So, I made another graph, this time with that relationship. Let's take a look.</p>
+<p><img alt="Artists with most songs" src="images/songs_per_artist.png"></p>
+<p>So, things are kind of similar, but we do have some new artists cracking the top 10 that were not there on the album list.</p>
+<p>Obviously, Pink Floyd is still on top with a ridiculous 1135 total songs. This is due to multi-disc releases, live albums, things like that which include far more tracks than a normal album could.</p>
+<p>Just about 200 songs behind at 916 is Johnny Cash, which makes sense as we said before, I have an enormous box set of his albums.</p>
+<p>Grateful Dead take the #3 spot this time with 835 songs, mostly due to live albums having tons of tracks.</p>
+<p>Old Hank Williams shows up in #4 this time, with the Beatles trailing behind him to round out the top 5.</p>
+<p>Sinatra now shows up #6 with his huge multi-disc box set doing some heavy lifting. We then see about a 100 song drop off down to Duke Ellington's box set. And although we know Coe and Kristofferson have the same amount of albums, it's Coe that takes the lead in songs by about 50.</p>
+<p>Crooked gets to make the top 10 this time, with his many solo mixtape releases with tons of tracks getting him up to 338 total.</p>
+<p>Looking through the rest, it mostly correlates correctly with the album chart, with a lot of the same names making the top 50, but new ones here and there as well.</p>
+<hr>
+<h3>Part 3: Next Visualization Ideas</h3>
+<hr>
+<p>Now I need to figure out what to do next. My guess is I'll need to get ChatGPT more familiar with the way Plex's database handles the music metadata so we can find more interesting things to mess with other than just the simple Artist, Album, Song, Year, Genre that I have right now. I could also try brainstorming some more visualizations just based on those 5 if there really isn't anything else to do, but maybe there are some cool graphs and charts to make still with combos of those.</p>
+<p>Anyway, I'll leave you with this pretty nicely generated word cloud that I did of all my song titles. See ya later.</p>
+<p><img alt="Song Title Word Cloud" src="images/song_wordcloud.png"></p></p>
+    </article>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <nav>
+                <a href="https://fanto64.github.io/" class="footer-button">Home</a>
+                <a href="https://fanto64.github.io/categories.html" class="footer-button">Categories</a>
+                <a href="https://fanto64.github.io/pages/about.html" class="footer-button">About</a>
+            </nav>
+            <p>&copy;  Das Blog</p>
+        </div>
+    </footer>     
+</body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tags = document.querySelectorAll('.tag');
+        const colors = [
+            '#1c7ed6', '#1864ab', '#0b5394', '#083d77', '#034078',
+            '#00509d', '#2c7da0', '#144a74', '#1e3d59', '#1d2d50',
+            '#003f88', '#2a6f97', '#0e4d92', '#2c3e50', '#1f4e79'
+        ];
+        
+        tags.forEach(tag => {
+            const colorIndex = tag.innerText.length % colors.length;
+            tag.style.backgroundColor = colors[colorIndex];
+        });
+    });
+</script>
