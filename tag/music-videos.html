@@ -1,0 +1,56 @@
+<!-- tag.html -->
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Blog</title>
+    <link rel="stylesheet" href="https://fanto64.github.io/theme/css/retro.css">
+    <link rel="icon" type="image/x-icon" href="{static}/favicon.ico">
+</head>
+<body>
+    <header>
+        <h1>Das Blog</h1>
+        <nav>
+            <a href="https://fanto64.github.io/" class="header-button">Home</a>
+            <a href="https://fanto64.github.io/categories.html" class="header-button">Categories</a>
+            <a href="https://fanto64.github.io/pages/about.html" class="header-button">About</a>
+        </nav>
+    </header>    
+    <div class="content">
+    <h2>Tag: music-videos</h2>
+    <ul>
+            <li>
+                <a href="https://fanto64.github.io/plex_music_videos.html">Adding Music Videos to Plex</a>
+                <small>(2024-06-09 00:00:00-05:00)</small>
+            </li>
+    </ul>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <nav>
+                <a href="https://fanto64.github.io/" class="footer-button">Home</a>
+                <a href="https://fanto64.github.io/categories.html" class="footer-button">Categories</a>
+                <a href="https://fanto64.github.io/pages/about.html" class="footer-button">About</a>
+            </nav>
+            <p>&copy;  Das Blog</p>
+        </div>
+    </footer>     
+</body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tags = document.querySelectorAll('.tag');
+        const colors = [
+            '#1c7ed6', '#1864ab', '#0b5394', '#083d77', '#034078',
+            '#00509d', '#2c7da0', '#144a74', '#1e3d59', '#1d2d50',
+            '#003f88', '#2a6f97', '#0e4d92', '#2c3e50', '#1f4e79'
+        ];
+        
+        tags.forEach(tag => {
+            const colorIndex = tag.innerText.length % colors.length;
+            tag.style.backgroundColor = colors[colorIndex];
+        });
+    });
+</script>

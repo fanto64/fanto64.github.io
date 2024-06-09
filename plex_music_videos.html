@@ -1,0 +1,194 @@
+<!-- article.html -->
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Blog</title>
+    <link rel="stylesheet" href="https://fanto64.github.io/theme/css/retro.css">
+    <link rel="icon" type="image/x-icon" href="{static}/favicon.ico">
+</head>
+<body>
+    <header>
+        <h1>Das Blog</h1>
+        <nav>
+            <a href="https://fanto64.github.io/" class="header-button">Home</a>
+            <a href="https://fanto64.github.io/categories.html" class="header-button">Categories</a>
+            <a href="https://fanto64.github.io/pages/about.html" class="header-button">About</a>
+        </nav>
+    </header>    
+    <div class="content">
+    <article>
+        <h2>Adding Music Videos to Plex</h2>
+        <div class="article-meta">
+            <span class="published-date">
+                <small>Published on: June 09, 2024</small>
+            </span>
+            <span class="meta-info">
+            </span>
+        </div>
+        <div class="tags">
+                <button class="tag">plex</button>
+                <button class="tag">music</button>
+                <button class="tag">music-videos</button>
+                <button class="tag">blog</button>
+        </div>
+        <p><hr>
+<h3>Part 1: The How-To</h3>
+<hr>
+<p>So, I took a bit of a detour during my journey to add tons more music to my Plex library (more on that in a future blog) when I found out that it is possible to add music videos to an artist's page on Plex.</p>
+<p>To accomplish this, it's quite easy. You simply create a new folder somewhere named whatever you want, I named mine "Music Videos". Inside of that folder, you create a new folder with the name of the video's artist, and inside there, you place the video file using the naming convention "{Song Title}-video".</p>
+<p>Then, under your Plex settings page, scroll down on the left to where it says "Extras" and at the bottom of that page, there is a setting called "Global Music Videos Path". Here is where you enter the location of the Music Videos folder you made, so mine looks like "D:\Music Videos".</p>
+<p>If you're only adding one artist at a time, you can simply go to the artist in your Plex, click the little vertical "..." button, and choose "Refresh Metadata". As long as the artist in Plex is named the same as they are in the folder, it should find the video, and it will now be located near the bottom of their artist page under "Extras".</p>
+<p>Now, if you are like me and you wanted to add over 2000 music videos at the same time, then to get the artist pages to update, you will have to go to your music library, and in the panel on the left, click the little "..."" button, go to Manage Library, and then Refresh All Metadata. This will take a long time, it took hours for my very large library to refresh full, but when it was done, all of the music videos I had were now right there under their artist's page.</p>
+<p>So... where did I get all the videos?</p>
+<hr>
+<h3>Part 2: The Where-To</h3>
+<hr>
+<p>Well, YouTube of course. Without giving away my sources completely, let's say some simple Google searches led me to some very large playlists containing hundreds of videos each. One for the 80s, one for the 90s, and one for the 2000s.</p>
+<p>I then used JDownloader 2 to download the entire playlists. It's a program that has YouTube downloading capabilities among many other popular sites that it can download from. I usually use it for archive.org personally.</p>
+<p>Anyway, downloading the videos was a trivial task overall. What wasn't quite as trivial was the next step I had to take. How do I get all of these videos into the right folder structure for Plex to add them to the artist pages?</p>
+<hr>
+<h3>Part 3: The Renamening</h3>
+<hr>
+<p>Ok, I knew what needed to be done for this to happen. I explained it in part 1 of this blog. Taking a look at the video files, at least 99% of them had all of the relevant info I needed, which was just Artist and Song names, and most were formatted like "Artist - Song (Music Video) (Video Codec Info)". And if they weren't formatted exactly like that, it was very similar, with only a few stragglers that were way off.</p>
+<p>This was good news. I knew that I could write a Python script to accomplish this easily, and that any that it messed up on would be easy to fix or wouldn't be that big of a deal ultimately.</p>
+<p>So let's take a look at the script (writted with the assistance of ChatGPT of course):</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sanitize_filename</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Replace problematic characters with an underscore</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[&lt;&gt;:&quot;/</span><span class="se">\\</span><span class="s1">|?*]&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">organize_music_videos</span><span class="p">(</span><span class="n">folder_path</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Regular expression patterns to match the filename formats</span>
+<span class="w">    </span><span class="n">patterns</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(.*?) - (.*?) (\(.*?\) )?\(.*?\)\.(.*)$&#39;</span><span class="p">),</span>
+<span class="w">        </span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(.*?) - (.*?)\.(.*)$&#39;</span><span class="p">),</span>
+<span class="w">        </span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(.*?)_ (.*?) \(.*?\)\.(.*)$&#39;</span><span class="p">),</span>
+<span class="w">        </span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(.*?) – (.*?) \[.*?\] \[.*?\]\.(.*)$&#39;</span><span class="p">),</span>
+<span class="w">        </span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(.*?) (.*?) \(.*?\)\.(.*)$&#39;</span><span class="p">)</span>
+<span class="w">    </span><span class="p">]</span>
+
+<span class="w">    </span><span class="c1"># Get a list of all files in the folder</span>
+<span class="w">    </span><span class="n">files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="n">f</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">folder_path</span><span class="p">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">))]</span>
+
+<span class="w">    </span><span class="n">unmatched_files</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[]</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">files</span><span class="p">:</span>
+<span class="w">        </span><span class="n">matched</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">False</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">pattern</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">patterns</span><span class="p">:</span>
+<span class="w">            </span><span class="n">match</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pattern</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="n">match</span><span class="p">:</span>
+<span class="w">                </span><span class="n">groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">match</span><span class="o">.</span><span class="n">groups</span><span class="p">()</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">4</span><span class="p">:</span>
+<span class="w">                    </span><span class="n">artist</span><span class="p">,</span><span class="w"> </span><span class="n">song</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groups</span>
+<span class="w">                </span><span class="k">elif</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">3</span><span class="p">:</span>
+<span class="w">                    </span><span class="n">artist</span><span class="p">,</span><span class="w"> </span><span class="n">song</span><span class="p">,</span><span class="w"> </span><span class="n">ext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">groups</span>
+<span class="w">                </span><span class="k">else</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">continue</span>
+
+<span class="w">                </span><span class="n">artist_folder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span><span class="w"> </span><span class="n">sanitize_filename</span><span class="p">(</span><span class="n">artist</span><span class="o">.</span><span class="n">strip</span><span class="p">()))</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">artist_folder</span><span class="p">):</span>
+<span class="w">                    </span><span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">artist_folder</span><span class="p">)</span>
+
+<span class="w">                </span><span class="n">new_filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">sanitize_filename</span><span class="p">(</span><span class="n">song</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span><span class="si">}</span><span class="s2">-video.</span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="w">                </span><span class="n">old_file_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">folder_path</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="p">)</span>
+<span class="w">                </span><span class="n">new_file_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">artist_folder</span><span class="p">,</span><span class="w"> </span><span class="n">new_filename</span><span class="p">)</span>
+<span class="w">                </span><span class="n">shutil</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">old_file_path</span><span class="p">,</span><span class="w"> </span><span class="n">new_file_path</span><span class="p">)</span>
+<span class="w">                </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Moved &#39;</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">&#39; to &#39;</span><span class="si">{</span><span class="n">new_file_path</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+<span class="w">                </span><span class="n">matched</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">True</span>
+<span class="w">                </span><span class="k">break</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">matched</span><span class="p">:</span>
+<span class="w">            </span><span class="n">unmatched_files</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">unmatched_files</span><span class="p">:</span>
+<span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">The following files did not match any pattern:&quot;</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">uf</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">unmatched_files</span><span class="p">:</span>
+<span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="n">uf</span><span class="p">)</span>
+
+<span class="c1"># Usage</span>
+<span class="n">folder_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">r</span><span class="s1">&#39;C:\Rips\Music Videos\2000s&#39;</span><span class="w">  </span><span class="c1"># Replace with the path to your folder</span>
+<span class="n">organize_music_videos</span><span class="p">(</span><span class="n">folder_path</span><span class="p">)</span>
+</code></pre></div>
+
+<p>So yeah, if you ever want to do this same thing to an absurd amount of music videos, there's your script. I do <strong>NOT</strong> guarantee perfection, as I did not get perfection, but I did get at least 99% perfection I would say. There were a few that were like, song name first then artist name, or some other annoyingly different naming convention, so I had to go manually correct those, but they were few and far between and maybe took me like 5-10 minutes to do. And remember, I had over 2000 videos.</p>
+<p>So, now I had all the videos sorted into the music library in Plex, but what if I wanted to have custom Plex video libraries containing all of these music videos too, to make like, my own MTV?</p>
+<hr>
+<h3>Part 4: I Want My MTV</h3>
+<hr>
+<p>So, this part took me a little bit of trial and error, but luckily I will just show you the non-error version.</p>
+<p>What I wanted to do, was set up 3 different music libraries. One for each of these decades that I downloaded videos from.</p>
+<p>Luckily, I saved all of these videos into folders by decade already, and I only copied them over to my new Music Video folder all together, so I still had the original files in their decade folders.</p>
+<p>So what I had was 3 folders, each with a bunch of folders in them of artist names, and inside those folders were the artist's videos, named like "Song Title-video".</p>
+<p>What I wanted to do was take that, and alter all of the file names to instead be named like "Artist - Song Title". Luckily, I can easily associate the artist name with these songs titles via the folder names, so again, I knew a script could be easily written to accomplish this task.</p>
+<p>And here it is:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rename_files</span><span class="p">(</span><span class="n">main_folder</span><span class="p">):</span>
+<span class="w">    </span><span class="c1"># Traverse through each artist&#39;s folder in the main folder</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">artist_folder</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">main_folder</span><span class="p">):</span>
+<span class="w">        </span><span class="n">artist_folder_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">main_folder</span><span class="p">,</span><span class="w"> </span><span class="n">artist_folder</span><span class="p">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">artist_folder_path</span><span class="p">):</span>
+<span class="w">            </span><span class="c1"># Process each file in the artist&#39;s folder</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="n">file_name</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">artist_folder_path</span><span class="p">):</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="n">file_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;-video.mp4&quot;</span><span class="p">):</span>
+<span class="w">                    </span><span class="c1"># Remove &quot;-video&quot; from the end of the file name</span>
+<span class="w">                    </span><span class="n">song_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">file_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-video&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="w">                    </span><span class="c1"># Create the new file name with the artist name prefixed</span>
+<span class="w">                    </span><span class="n">new_file_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">artist_folder</span><span class="si">}</span><span class="s2"> - </span><span class="si">{</span><span class="n">song_name</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">                    </span><span class="n">old_file_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">artist_folder_path</span><span class="p">,</span><span class="w"> </span><span class="n">file_name</span><span class="p">)</span>
+<span class="w">                    </span><span class="n">new_file_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">artist_folder_path</span><span class="p">,</span><span class="w"> </span><span class="n">new_file_name</span><span class="p">)</span>
+<span class="w">                    </span><span class="c1"># Rename the file</span>
+<span class="w">                    </span><span class="n">os</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">old_file_path</span><span class="p">,</span><span class="w"> </span><span class="n">new_file_path</span><span class="p">)</span>
+<span class="w">                    </span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Renamed: </span><span class="si">{</span><span class="n">old_file_path</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">new_file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Replace &#39;path_to_main_folder&#39; with the actual path to your main folder</span>
+<span class="n">main_folder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sa">r</span><span class="s1">&#39;path_to_main_folder&#39;</span>
+<span class="n">rename_files</span><span class="p">(</span><span class="n">main_folder</span><span class="p">)</span>
+</code></pre></div>
+
+<p>So, in laymen's terms, that script removes the "-video" from the ends of the filenames, and then puts the Artist name, fetched from the folder name, at the start of the file.</p>
+<p>Now, all I had to do was move these folders to their own new folder, and create Plex custom video libraries for each of the decade folders. The videos now show up in these libraries using the "Artist - Song Title" naming convention, which looks much cleaner and is much easier to search through than having just the song titles as they appear in the artist pages in the Music library.</p>
+<hr>
+<h3>Part 5: The Conclusion</h3>
+<hr>
+<p>And there we have it. I now have a huge collection of music videos on my Plex server. They can be viewed not only in my music library under their respective Artist pages, but they are also in their own new libraries, one for the 80s, one for the 90s, and one for the 2000s, which can be searched through for specific videos, or played at random to simulate MTV.</p>
+<video width="640" height="480" controls>
+  <source src="videos/Never Gonna Give You Up-video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video></p>
+    </article>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <nav>
+                <a href="https://fanto64.github.io/" class="footer-button">Home</a>
+                <a href="https://fanto64.github.io/categories.html" class="footer-button">Categories</a>
+                <a href="https://fanto64.github.io/pages/about.html" class="footer-button">About</a>
+            </nav>
+            <p>&copy;  Das Blog</p>
+        </div>
+    </footer>     
+</body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tags = document.querySelectorAll('.tag');
+        const colors = [
+            '#1c7ed6', '#1864ab', '#0b5394', '#083d77', '#034078',
+            '#00509d', '#2c7da0', '#144a74', '#1e3d59', '#1d2d50',
+            '#003f88', '#2a6f97', '#0e4d92', '#2c3e50', '#1f4e79'
+        ];
+        
+        tags.forEach(tag => {
+            const colorIndex = tag.innerText.length % colors.length;
+            tag.style.backgroundColor = colors[colorIndex];
+        });
+    });
+</script>
