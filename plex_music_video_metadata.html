@@ -1,0 +1,111 @@
+<!-- article.html -->
+<!-- base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Das Blog</title>
+    <link rel="stylesheet" href="https://fanto64.github.io/theme/css/retro.css">
+    <link rel="icon" type="image/x-icon" href="{static}/favicon.ico">
+</head>
+<body>
+    <header>
+        <h1>Das Blog</h1>
+        <nav>
+            <a href="https://fanto64.github.io/" class="header-button">Home</a>
+            <a href="https://fanto64.github.io/categories.html" class="header-button">Categories</a>
+            <a href="https://fanto64.github.io/pages/about.html" class="header-button">About</a>
+        </nav>
+    </header>    
+    <div class="content">
+    <article>
+        <h2>Adding correct metadata to music videos in Plex</h2>
+        <div class="article-meta">
+            <span class="published-date">
+                <small>Published on: June 22, 2024</small>
+            </span>
+            <span class="meta-info">
+            </span>
+        </div>
+        <div class="tags">
+                <button class="tag">blog</button>
+                <button class="tag">plex</button>
+        </div>
+        <p><hr>
+<h3>Part 1: The Problem</h3>
+<hr>
+<p>So, getting the correct metadata added to my music videos and getting them at least reasonably displayed and organized in my Plex server wound up being quite the task, but I'm pretty happy with the results now in the end.</p>
+<p>Originally, when adding them as a custom video library, it didn't really have a problem getting them all on there or anything, but the years were not right, and the names were displayed pretty ugly, and not wanting to manually edit this, I had to come up with a new solution.</p>
+<p>After a lot of trial and error, I eventually landed on a pretty consistently reliable way to download music videos, properly format the filenames, search Musicbrainz for the earliest release date of the song, update the filename with the year, create corresponding NFO files with the metadata, and even create a custom forced subtitle file that displays said metadata at the start and end of the video.</p>
+<hr>
+<h3>Part 2: The Downloading</h3>
+<hr>
+<p>So, when downloading music videos, it's really helpful if the filenames are formatted in an extremely consistent way. The way that I wound up formatting them, was as <code>{Channel Name} ~-~ {Video Title}.mp4</code>. The tilde-dash-tilde was my way of making a unique identifier for anything looking to parse the file name in the future.</p>
+<p>Now, without revealing my sources, the playlists I decided to download these videos from were pretty reliable in having the artist name as the channel name, and the song title as the video title. </p>
+<p>Sometimes the artist title might be a little off, but those I manually edited by eye after being downloaded. For the video titles though, those can at times be way off, including unneccessary and inconsistently formatted information after the song title. Luckily, it is usualy all after the song title, and sometimes it is consistently formatted, so a lot of them I renamed with a batch file renaming program. The rest, unfortunately, needed to be cleaned up manually, as there were just far too many edge cases.</p>
+<p>Now, at the end of all of this, what I had was around 2000 videos, all very nicely formatted like <code>{Artist Name} ~-~ {Song Title}.mp4</code>. The next step was finding out the year that these songs first released.</p>
+<hr>
+<h3>Part 3: The Search for the Original Release Year</h3>
+<hr>
+<p>This was perhaps the most trial and error portion of the entire process. I can't tell you how many times I had to revise this script, and make it as foolproof as I possibly could based on the dataset I was working with.</p>
+<p>But in the end, what I wound up with was a Python script that did the following.</p>
+<p>First, it would take as input a folder, and it would search this folder for each mp4 file within it, and parse our the artist and song names. It would then ping Musicbrainz for the artist name, match it up with the results as best it could, and then get all of the releases from that artist. It would then trim that list down to just the decade that my music videos were from, which I was able to orgnaize based on the playlists. It would then chronologically search through each release by the artist in that decade until it found the song title it was looking for. It would then check that release's year, and consider that to be the earliest release year for the song. The filename would then be updated to instead read like <code>{Artist Name} ~-~ {Song Title} (Year).mp4</code>. After that, it would move on to the next mp4 file and repeat the process until it was done. If it could not find it in that decade, it would check the previous decade. If it could not find it in the previous decade, it would instead check the next decade. If it still could not find it after that, it would save it's name until the end, when it would save a new txt file with the list of files it could not match.</p>
+<p>Running this script on around 2000 files produced almost perfect accuracy on finding the earliest release dates, and only a couple dozen or so that it could not match, and those were mostly the result of incorrectly named artists or song titles. The time it took to run the script on all of those files was definitely calculated in hours rather than minutes, but the results were impossible to argue with.</p>
+<p>So, after manually doing the few remaining that the script didn't find, I now had all of my music video files properly named with their artist name, song title, and release year.</p>
+<p>The next step was figuring out how to get Plex to properly read this into it's own metadata.</p>
+<hr>
+<h3>Part 4: The Plexifying</h3>
+<hr>
+<p>So long story short, I needed to get a custom Plex plugin to handle metadata for custom videos the way I wanted to do it. Basically, I can save corresponding NFO files for each video with the artist name, song title, and year all properly stored in xml format or whatever. </p>
+<p>Setting the library to use this plugin as it's metadata agent then allows it to scan in those NFO files and set those attributes for the video library. This means all of my videos can now show up right away in the library with the song and artist names, as well as the year they were originally released, right there in Plex.</p>
+<p>So with that all set up, I was then able to create Collections for each year, as well as like "early" "mid" and "late" collections for the decades, like a "late 90s" one that goes from 1997-1999 for example.</p>
+<p>These Collections can then be entered and told to play randomly, giving the feeling of watching MTV in that specific year or timeframe.</p>
+<p>However... it wasn't <em>quite</em> like watching on MTV yet. </p>
+<hr>
+<h3>Part 5: The Custom Subtitles</h3>
+<hr>
+<p>So, remember how on MTV there would be a little overlay that had the name of the song and the artist and the year and other stuff over in the corner at the start and end of the video?</p>
+<p>Wouldn't it be cool if my videos could have that too?</p>
+<p>But how am I going to get that done, I thought to myself. There's no way I'm going to somehow go off and re-encode the videos with text overlayed on it, that's way too much work.</p>
+<p>But then, it came to me all at once. We already have a method of overlaying text on top of a video while it's playing. They are called subtitles.</p>
+<p>I knew that there were subtitle files out there, like the .srt files or whatever, that could correspond with a video file, and I knew that Plex could handle these.</p>
+<p>So, after doing some digging and some scripting, what I wound up with was a pretty elegant solution. My script would simply use ffmpeg to find out the length of a video file, save that in the correct format of hours:minutes:seconds:milliseconds, and then create a new srt file with the same name as the mp4 file (tagged as .eng.forced.srt to denote forced english subs) that contains all the properly formatted timestamps to display the metadata in the corresponding NFO file for the first and last ten seconds of the video.</p>
+<p>After refreshing the metadata in Plex, it then sees the subtitle files and auto selects them to display whenever the videos are played.</p>
+<p>This simulates the way in which music video's artists and song titles were displayed at the start and end of a video on MTV.</p>
+<p>I'm unsure if there are ways of more properly formatting the subtitles to display in the bottom left corner like they would on MTV, but it's something I can probably look into for the future.</p>
+<hr>
+<h3>Part 6: The Conclusion</h3>
+<hr>
+<p>Well, that's how I did it. It took a lot of time and effort, and lot of script writing, to get this job done, but in the end I have a pretty foolproof way of doing this now. For smaller amounts of videos, it will be a lot easier to put it all together.</p>
+<p>In the future, I'd like to find ways of adding more metadata to the NFO files, both for Plex to store itself and to possibly display in the custom subtitles. I'd also love to look in to formatting the subtitles in the bottom left like they were on MTV.</p>
+<p>That's it from me for now, thanks for reading and I'll see you next time.</p></p>
+    </article>
+    </div>
+    <footer>
+        <div class="footer-content">
+            <nav>
+                <a href="https://fanto64.github.io/" class="footer-button">Home</a>
+                <a href="https://fanto64.github.io/categories.html" class="footer-button">Categories</a>
+                <a href="https://fanto64.github.io/pages/about.html" class="footer-button">About</a>
+            </nav>
+            <p>&copy;  Das Blog</p>
+        </div>
+    </footer>     
+</body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tags = document.querySelectorAll('.tag');
+        const colors = [
+            '#1c7ed6', '#1864ab', '#0b5394', '#083d77', '#034078',
+            '#00509d', '#2c7da0', '#144a74', '#1e3d59', '#1d2d50',
+            '#003f88', '#2a6f97', '#0e4d92', '#2c3e50', '#1f4e79'
+        ];
+        
+        tags.forEach(tag => {
+            const colorIndex = tag.innerText.length % colors.length;
+            tag.style.backgroundColor = colors[colorIndex];
+        });
+    });
+</script>
